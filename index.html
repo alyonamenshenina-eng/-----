@@ -76,12 +76,11 @@
     measurementId: "G-6E10ED09KQ"
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  
-document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+    // Логика кнопки
+    document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const nameInput = document.getElementById("userName").value;
