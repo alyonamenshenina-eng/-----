@@ -64,13 +64,11 @@
 };
       Вот текст с изображений (переписан вручную):
 
-```javascript
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// --- ЛОГИКА АВТОРИЗАЦИИ ---
 const loginBtn = document.getElementById('loginBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 const userInfo = document.getElementById('userInfo');
@@ -96,7 +94,6 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// --- ЛОГИКА РАБОТЫ С ДАННЫМИ ---
 window.processLike = async (id) => {
     await updateDoc(doc(db, "requests", id), { likes: increment(1) });
 };
@@ -120,7 +117,6 @@ document.getElementById('mainBtn').onclick = async () => {
     }
 };
 
-// --- REAL-TIME ОБНОВЛЕНИЕ ЛЕНТЫ ---
 const q = query(collection(db, "requests"), orderBy("timestamp", "desc"));
 onSnapshot(q, (snapshot) => {
     const feed = document.getElementById('feed');
