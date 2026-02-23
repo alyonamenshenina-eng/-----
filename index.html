@@ -1,59 +1,153 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Облачное приложение</title>
-  <style>
-    body { font-family: 'Inter', sans-serif; background: #f4f7f6; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-    .container { width: 100%; max-width: 500px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Облачное приложение</title>
 
-    /* Стили блока авторизации */
-    .auth-bar { background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .user-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #007bff; }
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f4f7f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
 
-    input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
-    button { background: #007bff; color: white; border: none; padding: 12px; border-radius: 6px; width: 100%; font-weight: 600; cursor: pointer; transition: 0.3s; }
-    button:hover { background: #0056b3; }
-    button:disabled { background: #ccc; }
-    .logout-btn { background: #ff4757; padding: 8px 15px; width: auto; font-size: 14px; }
+.container {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
 
-    .post { background: #fff; border: 1px solid #eaeaea; padding: 15px; margin-top: 15px; border-radius: 8px; width: 100%; max-width: 500px; }
-    .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .post-avatar { width: 30px; height: 30px; border-radius: 50%; }
-    .like-btn { cursor: pointer; border: none; background: #f8f9fa; padding: 5px 12px; border-radius: 20px; margin-top: 10px; }
-    .time { font-size: 11px; color: #999; margin-left: auto; }
-  </style>
+.auth-bar {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover { background: #0056b3; }
+button:disabled { background: #ccc; }
+
+.logout-btn {
+  background: #ff4757;
+  padding: 8px 15px;
+  width: auto;
+  font-size: 14px;
+}
+
+.post {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.post-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.like-btn {
+  cursor: pointer;
+  border: none;
+  background: #f8f9fa;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.time {
+  font-size: 11px;
+  color: #999;
+  margin-left: auto;
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+</style>
 </head>
 
 <body>
 
-  <div id="authSection" class="container" style="max-width: 500px; text-align: center;">
-    <button id="loginBtn">Войти через Google</button>
+<div id="authSection" class="container" style="text-align:center;">
+  <button id="loginBtn">Войти через Google</button>
 
-    <div id="userInfo" style="display: none;" class="auth-bar">
-      <img id="userPhoto" class="user-avatar" src="" alt="Avatar">
-      <span id="userName" style="font-weight: bold;"></span>
-      <button id="logoutBtn" class="logout-btn">Выйти</button>
-    </div>
+  <div id="userInfo" style="display:none;" class="auth-bar">
+    <img id="userPhoto" class="user-avatar" src="">
+    <span id="userName" style="font-weight:bold;"></span>
+    <button id="logoutBtn" class="logout-btn">Выйти</button>
   </div>
+</div>
 
-  <div id="messageForm" class="container" style="display: none;">
-    <h3>Создать запись</h3>
-    <input type="text" id="name" placeholder="Имя профиля" readonly>
-    <input type="email" id="email" placeholder="Ваш Email" readonly>
-    <input type="text" id="content" placeholder="Что у вас нового?">
-    <input type="file" id="imageInput" accept="image/*">
-    <button id="mainBtn">Опубликовать в облако</button>
-  </div>
+<div id="messageForm" class="container" style="display:none;">
+  <h3>Создать запись</h3>
+  <input type="text" id="name" readonly>
+  <input type="email" id="email" readonly>
+  <input type="text" id="content" placeholder="Что у вас нового?">
+  <input type="file" id="imageInput" accept="image/*">
+  <button id="mainBtn">Опубликовать</button>
+</div>
 
-  <div id="feed" style="width: 100%; max-width: 500px;"></div>
+<div id="feed" style="width:100%; max-width:500px;"></div>
 
-  <script type="module">
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, updateDoc, doc, increment } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, updateDoc, doc, increment } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCh90XrGHx08ElQ5hsUN4SXZOnVJTSwzVo",
@@ -61,14 +155,13 @@ const firebaseConfig = {
   projectId: "myproject-4f292",
   storageBucket: "myproject-4f292.firebasestorage.app",
   messagingSenderId: "715831246395",
-  appId: "1:715831246395:web:f0b253fdcd64ec9199a61e",
-  measurementId: "G-6E10ED09KQ"
+  appId: "1:715831246395:web:f0b253fdcd64ec9199a61e"
 };
-    
-const storage = getStorage(app);
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
 
 const loginBtn = document.getElementById('loginBtn');
@@ -80,92 +173,99 @@ loginBtn.onclick = () => signInWithPopup(auth, provider);
 logoutBtn.onclick = () => signOut(auth);
 
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        loginBtn.style.display = 'none';
-        userInfo.style.display = 'flex';
-        messageForm.style.display = 'block';
-
-        document.getElementById('userName').innerText = user.displayName;
-        document.getElementById('userPhoto').src = user.photoURL;
-        document.getElementById('name').value = user.displayName;
-        document.getElementById('email').value = user.email;
-    } else {
-        loginBtn.style.display = 'block';
-        userInfo.style.display = 'none';
-        messageForm.style.display = 'none';
-    }
+  if (user) {
+    loginBtn.style.display = 'none';
+    userInfo.style.display = 'flex';
+    messageForm.style.display = 'block';
+    document.getElementById('userName').innerText = user.displayName;
+    document.getElementById('userPhoto').src = user.photoURL;
+    document.getElementById('name').value = user.displayName;
+    document.getElementById('email').value = user.email;
+  } else {
+    loginBtn.style.display = 'block';
+    userInfo.style.display = 'none';
+    messageForm.style.display = 'none';
+  }
 });
 
 window.processLike = async (id) => {
-    await updateDoc(doc(db, "requests", id), { likes: increment(1) });
+  await updateDoc(doc(db, "requests", id), {
+    likes: increment(1)
+  });
 };
 
 document.getElementById('mainBtn').onclick = async () => {
-    const content = document.getElementById('content').value;
-    const file = document.getElementById('imageInput').files[0];
 
-    if (!content && !file) 
-        return alert("Добавьте текст или изображение!");
+  const content = document.getElementById('content').value;
+  const file = document.getElementById('imageInput').files[0];
 
-    try {
-        let imageUrl = "";
+  if (!content && !file)
+    return alert("Добавьте текст или изображение!");
 
-        // Если выбрана картинка — загружаем
-        if (file) {
-            const imageRef = ref(storage, 
-                "images/" + Date.now() + "_" + file.name
-            );
+  try {
 
-            await uploadBytes(imageRef, file);
-            imageUrl = await getDownloadURL(imageRef);
-        }
+    let imageUrl = "";
 
-        await addDoc(collection(db, "requests"), {
-            name: auth.currentUser.displayName,
-            email: auth.currentUser.email,
-            photo: auth.currentUser.photoURL,
-            text: content,
-            image: imageUrl,
-            likes: 0,
-            timestamp: serverTimestamp()
-        });
-
-        document.getElementById('content').value = "";
-        document.getElementById('imageInput').value = "";
-
-    } catch (e) {
-        alert("Ошибка загрузки! Проверьте Storage Rules.");
-        console.error(e);
+    if (file) {
+      const imageRef = ref(storage, "images/" + Date.now() + "_" + file.name);
+      await uploadBytes(imageRef, file);
+      imageUrl = await getDownloadURL(imageRef);
     }
-};onSnapshot
+
+    await addDoc(collection(db, "requests"), {
+      name: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      photo: auth.currentUser.photoURL,
+      text: content,
+      image: imageUrl,
+      likes: 0,
+      timestamp: serverTimestamp()
+    });
+
+    document.getElementById('content').value = "";
+    document.getElementById('imageInput').value = "";
+
+  } catch (e) {
+    alert("Ошибка! Проверьте Firestore и Storage Rules.");
+    console.error(e);
+  }
+};
 
 const q = query(collection(db, "requests"), orderBy("timestamp", "desc"));
-onSnapshot(q, (snapshot) => {
-    const feed = document.getElementById('feed');
-    feed.innerHTML = "";
 
-    snapshot.forEach((doc) => {
-        const data = doc.data();
-        feed.innerHTML += `
-            <div class="post">
-                <div class="post-header">
-                    <img src="${data.photo || 'https://via.placeholder.com/30'}" class="post-avatar">
-                    <b>${data.name}</b>
-                    <span class="time">
-                        ${data.timestamp?.toDate().toLocaleTimeString() || '...'}
-                    </span>
-                </div>
-                <p>${data.text || ""}</p>
-                ${data.image ? `<img src="${data.image}" style="width:100%; border-radius:8px; margin-top:10px;">` : ""}
-                <button class="like-btn" onclick="processLike('${doc.id}')">
-                    👍 ${data.likes || 0}
-                </button>
-            </div>
-        `;
-    });
+onSnapshot(q, (snapshot) => {
+
+  const feed = document.getElementById('feed');
+  feed.innerHTML = "";
+
+  snapshot.forEach((docItem) => {
+    const data = docItem.data();
+
+    feed.innerHTML += `
+      <div class="post">
+        <div class="post-header">
+          <img src="${data.photo || 'https://via.placeholder.com/30'}" class="post-avatar">
+          <b>${data.name}</b>
+          <span class="time">
+            ${data.timestamp?.toDate().toLocaleTimeString() || '...'}
+          </span>
+        </div>
+
+        <p>${data.text || ""}</p>
+
+        ${data.image ? `<img src="${data.image}" class="post-image">` : ""}
+
+        <button class="like-btn" onclick="processLike('${docItem.id}')">
+          👍 ${data.likes || 0}
+        </button>
+      </div>
+    `;
+  });
+
 });
 
-window.db = db; // Для тестов в консоли F12
-  </script>
+window.db = db;
+
+</script>
 </body>
 </html>
